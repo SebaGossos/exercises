@@ -49,4 +49,6 @@ function calcularAreaPoligono( {tipo, base, altura}: Poligono ): number | string
 
 
 
-console.log( calcularAreaPoligono({tipo: 'triangulo', base: 6}) )
+console.log( calcularAreaPoligono({tipo: 'triangulo', base: 6, altura: 9}) )
+console.log( calcularAreaPoligono({tipo: 'cuadrado', base: 6}) )
+console.log( calcularAreaPoligono({tipo: 'rectangulo', base: 6, altura: 9}) )
