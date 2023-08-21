@@ -18,12 +18,10 @@ function renombrarArchivos(files) {
             numberOfFiles[file] = 1;
             return file;
         }
-        else {
-            return file.split('.')
-                .join(`(${numberOfFiles[file]++}).`);
-        }
+        return file.split('.')
+            .join(`(${numberOfFiles[file]++}).`);
+        // return file.replace(/(\.\w+)$/, `(${numberOfFiles[file]++})$1`) // ? POR ESTO DEBO APRENDER LAS EXPRESIONES REGULARES...
     });
-    console.log(splitArray);
-    return [];
+    return splitArray;
 }
-renombrarArchivos(["nombre.jpg", "apellido.doc", "nombre.png", "nombre.png", "nombre.jpg", "nombre.jpg"]);
+console.log(renombrarArchivos(["nombre.jpg", "apellido.doc", "nombre.png", "nombre.png", "nombre.jpg", "nombre.jpg"]));
