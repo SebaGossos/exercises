@@ -15,7 +15,7 @@ function esArmstrong( armStrong: number ): boolean {
 
     let addFinal: number = 0;
     for ( let i of divisionArmStrong ){
-        addFinal += Math.pow(+i, divisionArmStrong.length )
+        addFinal += Math.pow( +i, divisionArmStrong.length )
     }
     
     return addFinal === armStrong;
