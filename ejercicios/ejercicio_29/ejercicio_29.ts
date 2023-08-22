@@ -1,6 +1,5 @@
-"use strict";
 /* Enunciado Ejercicio 29:
-Dado un array de objetos de peliculas de los años 80 y 90.
+Dado un array de objetos de peliculas de los años 80 y 90. 
  
 Crea dos funciones:
 - Una que las filtre por género
@@ -23,6 +22,13 @@ const peliculas = [
 Ejemplos:
 filtrarPorGenero(peliculas, "accion")
 filtrarPorDecada(peliculas, "80s") */
+
+type Peliculas = {
+    titulo: string;
+    genero: string;
+    anioLanzamiento: number;
+}
+
 const peliculas = [
     { titulo: "Terminator", genero: "accion", anioLanzamiento: 1984 },
     { titulo: "Alien", genero: "ciencia ficción", anioLanzamiento: 1979 },
@@ -35,11 +41,13 @@ const peliculas = [
     { titulo: "Armageddon", genero: "accion", anioLanzamiento: 1998 },
     { titulo: "Deep Impact", genero: "ciencia ficción", anioLanzamiento: 1998 }
 ];
-function filtrarPorGenero(peliculas, genero) {
-    return peliculas.filter(peli => peli.genero === genero);
+function filtrarPorGenero ( peliculas: Peliculas[] , genero: string ): Object[]{
+    return peliculas.filter( peli => peli.genero === genero )
 }
-function filtrarPorDecada(peliculas, decada) {
-    return peliculas.filter(peli => +peli.anioLanzamiento.toString().substring(2, 3) === +decada.substring(0, 1));
-}
-console.log(filtrarPorGenero(peliculas, "accion"));
-console.log(filtrarPorDecada(peliculas, "90s"));
+
+function filtrarPorDecada ( peliculas: Peliculas[] , decada: string ): Object[]{  
+    return peliculas.filter( peli => +peli.anioLanzamiento.toString().substring(2,3) === +decada.substring(0,1) ) 
+} 
+
+console.log( filtrarPorGenero(peliculas, "accion") )
+console.log( filtrarPorDecada(peliculas, "90s") )
