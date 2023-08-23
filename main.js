@@ -1,45 +1,49 @@
 "use strict";
-/* Enunciado Ejercicio 29:
-Dado un array de objetos de peliculas de los años 80 y 90.
+/* Enunciado Ejercicio 31:
+Dado un texto, crea una función que sea capaz de invertir
+el orden de sus palabras.
  
-Crea dos funciones:
-- Una que las filtre por género
-- y otra que las filtre por la decada en este formato 80s o 90s
- 
-Array de objetos a utilizar:
-const peliculas = [
-    { titulo: "Terminator", genero: "accion", anioLanzamiento: 1984 },
-    { titulo: "Alien", genero: "ciencia ficción", anioLanzamiento: 1979 },
-    { titulo: "Die Hard", genero: "accion", anioLanzamiento: 1988 },
-    { titulo: "Predator", genero: "accion", anioLanzamiento: 1987 },
-    { titulo: "Total Recall", genero: "ciencia ficción", anioLanzamiento: 1990 },
-    { titulo: "RoboCop", genero: "ciencia ficción", anioLanzamiento: 1987 },
-    { titulo: "Starship Troopers", genero: "ciencia ficción", anioLanzamiento: 1997 },
-    { titulo: "The Fifth Element", genero: "ciencia ficción", anioLanzamiento: 1997 },
-    { titulo: "Armageddon", genero: "accion", anioLanzamiento: 1998 },
-    { titulo: "Deep Impact", genero: "ciencia ficción", anioLanzamiento: 1998 }
-  ];
+No podemos usar funciones nativas del lenguaje.
  
 Ejemplos:
-filtrarPorGenero(peliculas, "accion")
-filtrarPorDecada(peliculas, "80s") */
-const peliculas = [
-    { titulo: "Terminator", genero: "accion", anioLanzamiento: 1984 },
-    { titulo: "Alien", genero: "ciencia ficción", anioLanzamiento: 1979 },
-    { titulo: "Die Hard", genero: "accion", anioLanzamiento: 1988 },
-    { titulo: "Predator", genero: "accion", anioLanzamiento: 1987 },
-    { titulo: "Total Recall", genero: "ciencia ficción", anioLanzamiento: 1990 },
-    { titulo: "RoboCop", genero: "ciencia ficción", anioLanzamiento: 1987 },
-    { titulo: "Starship Troopers", genero: "ciencia ficción", anioLanzamiento: 1997 },
-    { titulo: "The Fifth Element", genero: "ciencia ficción", anioLanzamiento: 1997 },
-    { titulo: "Armageddon", genero: "accion", anioLanzamiento: 1998 },
-    { titulo: "Deep Impact", genero: "ciencia ficción", anioLanzamiento: 1998 }
-];
-function filtrarPorGenero(peliculas, genero) {
-    return peliculas.filter(peli => peli.genero === genero);
+invertirPalabras("Hola soy Victor Robles"); // Devuelve: Robles Victor soy Hola */
+//! NATIVE FUNCTION 
+// function invertirPalabras( chain: string ): string {
+//     const arrChain = chain.split(' ').reverse()
+//     return arrChain.join(' ')
+// }
+//! WITHOUT NATIVE FUNCTION 
+function unshiftByMe(arr, ...items) {
+    let len = arr.length;
+    let n = items.length;
+    for (let i = len - 1; i >= 0; i--) {
+        arr[i + n] = arr[i];
+    }
+    for (let i = 0; i < n; i++) {
+        arr[i] = items[i];
+    }
+    return arr;
 }
-function filtrarPorDecada(peliculas, decada) {
-    return peliculas.filter(peli => +peli.anioLanzamiento.toString().substring(2, 3) === +decada.substring(0, 1));
+function invertirPalabras(chain) {
+    let newChain = [];
+    let word = '';
+    let finalWord = '';
+    for (let letter of chain) {
+        if (letter === ' ') {
+            newChain = unshiftByMe(newChain, word);
+            word = '';
+            continue;
+        }
+        word += letter;
+    }
+    newChain = unshiftByMe(newChain, word);
+    for (let i = 0; i < newChain.length; i++) {
+        if (i === 0) {
+            finalWord = newChain[i];
+            continue;
+        }
+        finalWord += ` ${newChain[i]}`;
+    }
+    return finalWord;
 }
-console.log(filtrarPorGenero(peliculas, "accion"));
-console.log(filtrarPorDecada(peliculas, "90s"));
+console.log(invertirPalabras("Hola soy Victor Robles"));
