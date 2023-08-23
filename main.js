@@ -30,6 +30,9 @@ function invertirPalabras(chain) {
     let finalWord = '';
     for (let letter of chain) {
         if (letter === ' ') {
+            if (word === '') {
+                continue;
+            }
             newChain = unshiftByMe(newChain, word);
             word = '';
             continue;
