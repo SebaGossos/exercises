@@ -35,7 +35,7 @@ function unshiftByMe ( arr:any[], ...items:any[] ): any[] {
 
 function invertirPalabras( chain: string ): string {
 
-    let newChain = [];
+    let newChain: any = [];
     let word = '';
     let finalWord = '';
 

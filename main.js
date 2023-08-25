@@ -1,18 +1,48 @@
 "use strict";
-/* Enunciado Ejercicio 32:
-Dado un texto, crea una función que sea capaz de generar
-un nuevo texto que incluya solo las palabras de 4 caracteres o más.
+/* Enunciado Ejercicio 34:
+Crea una función a la cual le pase un array y me devuelva
+un objeto con los elementos agrupados
  
 Ejemplos:
-fraseFiltrada("Hola soy Victor Robles, hoy hace frio");
+agrupar([7.2, 5.3, 7.4], Math.floor)
+Devuelve: { 7: [7.2, 7.4], 5: [5.3] }
  
-Devuelve: Hola Victor Robles, hace frio */
-function fraseFiltrada(frase) {
-    return frase.split(' ')
-        .filter(word => {
-        if (word.length >= 4)
-            return word;
-    })
-        .join(' ');
+agrupar(['uno', 'dos', 'tres', 'cuatro'], 'length')
+Devuelve: { 3: ['uno', 'dos', 'tres'], 6: ['cuatro'] }
+ 
+agrupar([{nombre: "victor", edad: 33}, {nombre: "paco", edad: 44}], 'edad')
+Devuelve: { 33: [{edad: 33}], 44: [{edad: 44}] }
+  */
+function agrupar(elements, filter) {
+    const wrappSend = {};
+    switch (filter) {
+        case Math.floor:
+            elements.forEach(e => {
+                const numb = Math.floor(e);
+                if (!wrappSend[numb]) {
+                    wrappSend[numb] = [];
+                }
+                wrappSend[numb].push(e);
+            });
+        case 'length':
+            elements.forEach(e => {
+                const quantityChain = e.length;
+                if (!wrappSend[quantityChain]) {
+                    wrappSend[quantityChain] = [];
+                }
+                wrappSend[quantityChain].push(e);
+            });
+        case 'edad':
+            elements.forEach(e => {
+                const age = e.edad;
+                if (!wrappSend[age]) {
+                    wrappSend[age] = [];
+                }
+                wrappSend[age].push(e);
+            });
+    }
+    return wrappSend;
 }
-console.log(fraseFiltrada("Hola soy Victor Robles, hoy hace frio"));
+// console.log( agrupar( [7.2, 5.3, 7.4], Math.floor ))
+// console.log( agrupar( ['uno', 'dos', 'tres', 'cuatro'], 'length' ))
+console.log(agrupar([{ nombre: "victor", edad: 33 }, { nombre: "ella", edad: 33 }, { nombre: "paco", edad: 44 }], 'edad'));
