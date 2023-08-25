@@ -30,7 +30,7 @@ function agrupar( elements: any[], filter: FilterKey ): Filter{
                 if ( !wrappSend[ numb ] ){
                     wrappSend[numb] = [];
                 }
-                wrappSend[numb].push( e )
+                wrappSend[numb].push( e ) 
             })
 
         case 'length':
