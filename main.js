@@ -1,25 +1,30 @@
 "use strict";
-/* Enunciado Ejercicio 35:
-Crea un programa que dados dos arrays de lenguajes frontend y backend
-y dado un parametro que sera un array con los nombres de dos lenguajes
-nos diga si son compatibles o no.
- 
-Solo pueden ser compatibles lenguajes front con uno de back
- 
-Ejemplos:
-sonCompatibles(["HTML", "PHP"])   // true
-sonCompatibles(["PHP", "PYTHON"]) // false */
-function sonCompatibles(lenguages, lenguageTwo) {
+var LenguajeFrontend;
+(function (LenguajeFrontend) {
+    LenguajeFrontend["HTML"] = "HTML";
+    LenguajeFrontend["CSS"] = "CSS";
+    LenguajeFrontend["JAVASCRIPT"] = "JAVASCRIPT";
+})(LenguajeFrontend || (LenguajeFrontend = {}));
+var LenguajeBackend;
+(function (LenguajeBackend) {
+    LenguajeBackend["PHP"] = "PHP";
+    LenguajeBackend["PYTHON"] = "PYTHON";
+    LenguajeBackend["RUBY"] = "RUBY";
+    LenguajeBackend["NODE"] = "NODE";
+    LenguajeBackend["CSHARP"] = "CSHARP";
+    LenguajeBackend["RUST"] = "RUST";
+    LenguajeBackend["GO"] = "GO";
+    LenguajeBackend["JAVA"] = "JAVA";
+})(LenguajeBackend || (LenguajeBackend = {}));
+function isASupportedLenguage(lenguages, lenguageTwo) {
     if (Array.isArray(lenguages) && (lenguageTwo === '' || !!lenguageTwo))
         throw `Din´t send an array of lenguages and a second argument, it's only array or two arguments in string`;
-    const fronted = ['HTML', 'HTML5', 'XHTML', 'CSS', 'CSS3', 'JAVASCRIPT'];
-    const backend = ['PHP', 'PYTHON', 'RUBY', 'NODE', 'C#', 'RUST', 'GO', 'GOLANG', 'JAVA'];
     if (Array.isArray(lenguages)) {
-        if ((fronted.includes(lenguages[0].toUpperCase()) && backend.includes(lenguages[1].toUpperCase()))
-            ||
-                (fronted.includes(lenguages[1].toUpperCase()) && backend.includes(lenguages[0].toUpperCase())))
+        console.log((lenguages[1] in LenguajeBackend));
+        if ((lenguages[0] in LenguajeBackend && lenguages[1] in LenguajeFrontend) ||
+            (lenguages[0] in LenguajeFrontend && lenguages[1] in LenguajeBackend))
             return true;
     }
     return false;
 }
-console.log(sonCompatibles(["HTML", "PHP"]));
+console.log(isASupportedLenguage([LenguajeFrontend.HTML, LenguajeBackend.CSHARP]));

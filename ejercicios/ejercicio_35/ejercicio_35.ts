@@ -6,27 +6,43 @@ nos diga si son compatibles o no.
 Solo pueden ser compatibles lenguajes front con uno de back
  
 Ejemplos:
-sonCompatibles(["HTML", "PHP"])   // true
-sonCompatibles(["PHP", "PYTHON"]) // false */
+isASupportedLenguage(["HTML", "PHP"])   // true
+isASupportedLenguage(["PHP", "PYTHON"]) // false */
+type Lenguage = string
 
-type Lenguages = [string, string] | string; 
+type Lenguages = [string, string] | Lenguage; 
 
-function sonCompatibles( lenguages: Lenguages, lenguageTwo?: string ): boolean{
+enum LenguajeFrontend {
+    HTML = 'HTML',
+    CSS = 'CSS',
+    JAVASCRIPT = 'JAVASCRIPT'
+}
+
+enum LenguajeBackend {
+    PHP = 'PHP',
+    PYTHON = 'PYTHON',
+    RUBY = 'RUBY',
+    NODE = 'NODE',
+    CSHARP = 'CSHARP',
+    RUST = 'RUST',
+    GO = 'GO',
+    JAVA = 'JAVA'
+}
+
+function isASupportedLenguage( lenguages: Lenguages, lenguageTwo?: string ): boolean{
     
     if( Array.isArray(lenguages) && ( lenguageTwo === '' || !!lenguageTwo ) ) 
         throw `Din´t send an array of lenguages and a second argument, it's only array or two arguments in string`
 
-    const fronted = ['HTML', 'HTML5', 'XHTML', 'CSS', 'CSS3', 'JAVASCRIPT'];
-    const backend = ['PHP', 'PYTHON', 'RUBY', 'NODE', 'C#', 'RUST', 'GO', 'GOLANG', 'JAVA'];
-
     if ( Array.isArray( lenguages ) ) {
-        if ((fronted.includes( lenguages[0].toUpperCase() ) && backend.includes( lenguages[1].toUpperCase() ))
-           ||
-           (fronted.includes( lenguages[1].toUpperCase() ) && backend.includes( lenguages[0].toUpperCase() ))) 
-           return true
+        console.log(( lenguages[1] in LenguajeBackend ))
+        if (
+            ( lenguages[0] in LenguajeBackend && lenguages[1] in LenguajeFrontend ) ||
+            ( lenguages[0] in LenguajeFrontend && lenguages[1] in LenguajeBackend )
+        ) return true
     }
     
     return false
 }
 
-console.log(sonCompatibles(["HTML", "PHP"]))
+console.log(isASupportedLenguage([LenguajeFrontend.HTML, LenguajeBackend.CSHARP]))
