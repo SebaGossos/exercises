@@ -13,53 +13,81 @@ agrupar([{nombre: "victor", edad: 33}, {nombre: "paco", edad: 44}], 'edad')
 Devuelve: { 33: [{edad: 33}], 44: [{edad: 44}] }
   */
 
-type Filter = {
-    [key:number]: any[]
+type Filter<T> = {
+    [key:number]: T[]
 }
 
-type FilterKey = Math['floor'] | string;
+type FilterKey = Math['floor'] | 'length' | 'edad';
 
-function agrupar( elements: any[], filter: FilterKey ): Filter{
+//! SOLUTION LESS EFICIENT
+// function agrupar( elements: T[], filter: FilterKey ): Filter{
 
-    const wrappSend: Filter = {}
+//     const wrappSend: Filter = {}
+    
 
-    switch( filter ){
-        case Math.floor:
-            elements.forEach( e => {
-                const numb = Math.floor( e )
-                if ( !wrappSend[ numb ] ){
-                    wrappSend[numb] = [];
-                }
-                wrappSend[numb].push( e ) 
-            })
+//     switch( filter ){
+//         case Math.floor:
+//             elements.forEach( e => {
+//                 const numb = Math.floor( e )
+//                 if ( !wrappSend[ numb ] ){
+//                     wrappSend[numb] = [];
+//                 }
+//                 wrappSend[numb].push( e ) 
+//             })
 
-        case 'length':
-            elements.forEach( e => {
-                const quantityChain = e.length
+//         case 'length':
+//             elements.forEach( e => {
+//                 const quantityChain = e.length
 
-                if ( !wrappSend[quantityChain] ){
-                    wrappSend[quantityChain] = [];
-                }
+//                 if ( !wrappSend[quantityChain] ){
+//                     wrappSend[quantityChain] = [];
+//                 }
 
-                wrappSend[quantityChain].push( e )
+//                 wrappSend[quantityChain].push( e )
                 
-            })
+//             })
 
-        case 'edad':
-            elements.forEach( e => {
-                const age = e.edad;
-                if ( !wrappSend[age] ){
-                    wrappSend[age] = []
-                }
+//         case 'edad':
+//             elements.forEach( e => {
+//                 const age = e.edad;
+//                 if ( !wrappSend[age] ){
+//                     wrappSend[age] = []
+//                 }
 
-                wrappSend[age].push(e)
-            })
+//                 wrappSend[age].push(e)
+//             })
+//     }
+    
+//     return wrappSend
+// }
+
+//!SOLUTION WITH GENERIC FUNCTION
+function agrupar<T extends { length?: number, edad?: number }>( elements: T[], filter: FilterKey ): Filter<T>{
+
+    function groupBy( func: (item:T) => number ): Filter<T>{
+
+        return elements.reduce((acc, e) => {
+            const key = func( e ) 
+            acc[key] = acc[key] || []
+            acc[key].push(e)
+            return acc
+        }, {} as Filter<T> )
+        
     }
     
-    return wrappSend
+    if (filter === Math.floor) {
+        return groupBy(Math.floor as unknown as (item: T) => number);
+    } else if (filter === 'length') {
+        return groupBy(e => e.length ?? 0);
+    } else if (filter === 'edad') {
+        return groupBy(e => e.edad ?? 0);
+    }
+    
+        
+    return {} as Filter<T>;
 }
 
 
-// console.log( agrupar( [7.2, 5.3, 7.4], Math.floor ))
+console.log( agrupar( [7.2, 5.3, 7.4], Math.floor ))
 // console.log( agrupar( ['uno', 'dos', 'tres', 'cuatro'], 'length' ))
-console.log(  agrupar([{nombre: "victor", edad: 33}, {nombre: "ella", edad: 33}, {nombre: "paco", edad: 44}], 'edad' ))
+// console.log(  agrupar([{nombre: "victor", edad: 33}, {nombre: "ella", edad: 33}, {nombre: "paco", edad: 44}], 'edad' ))
