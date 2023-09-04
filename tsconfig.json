@@ -106,5 +106,5 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["./ejercicios/ejercicio_35/ejercicio_35.ts"]
+  "include": ["./ejercicios/ejercicio_37/ejercicio_37.ts"]
 }
