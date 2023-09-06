@@ -1,20 +1,23 @@
 "use strict";
-/* Enunciado Ejercicio 37:
-Crea dos funciones que comprueben si dado un array de números,
-todos ellos son pares.
- 
-Una función usando metodos del lenguaje y otra solo usando estructuras de control.
+/* Enunciado Ejercicio 38:
+Crea una función que convierta un número a binario.
  
 Ejemplos:
-todosPares([1, 2, 3, 4]); // false
-todosPares([2, 6, 8, 12]); // true */
-// //!SOLUTION 1
-// const todosPares = ( numberSet: number[] ) => {
-//     return numberSet.find(number => number % 2 !== 0) ? false: true;
-// }
-//!SOLUTION 2
-const todosPares = (numberSet) => {
-    return numberSet.every(number => number % 2 === 0);
-};
-console.log(todosPares([1, 2, 3, 4]));
-console.log(todosPares([2, 6, 8, 12]));
+aBinario(10) // 1010
+aBinario(76) // 1001100 */
+function aBinario(num) {
+    let BinaryNum = [];
+    console.log(parseInt(''), +''); // NaN 0
+    while (num > 0) {
+        const rest = (num / 2);
+        num = Math.floor(rest);
+        if (Number.isInteger(rest)) {
+            BinaryNum.unshift(0);
+            continue;
+        }
+        BinaryNum.unshift(1);
+    }
+    return +BinaryNum.join('');
+}
+console.log(aBinario(0));
+// console.log( aBinario(76) )
