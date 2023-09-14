@@ -1,12 +1,15 @@
-"use strict";
 /* Enunciado Ejercicio 40:
 Crea una función que convierta un número romano a decimal.
  
 Ejemplos:
 romanoAEntero("XVIII")   // 18
 romanoAEntero("CXX")     // 120 */
-const romanoAEntero = (romNum) => {
-    const numerosRomanos = {
+
+type NumerosRomanos = {
+    [key:string]: number
+}
+const romanoAEntero = ( romNum: string ): number => {
+    const numerosRomanos: NumerosRomanos = {
         I: 1,
         V: 5,
         X: 10,
@@ -17,9 +20,12 @@ const romanoAEntero = (romNum) => {
     };
     const dividir = romNum.toUpperCase().split('');
     let result = 0;
-    for (let numRom of dividir)
-        result += numerosRomanos[numRom];
+    
+    for ( let numRom of dividir ) 
+        result += numerosRomanos[numRom]
+    
     return result;
-};
-console.log(romanoAEntero("XVIII"));
-console.log(romanoAEntero("CXX"));
+}
+
+console.log( romanoAEntero("XVIII") )
+console.log( romanoAEntero("CXX") )
