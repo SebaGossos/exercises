@@ -158,4 +158,4 @@ const orderSuperHeroes = (orderBy) => {
 };
 // console.log(orderSuperHeroes( "nombre" ))
 console.log(orderSuperHeroes("nombreReal"));
-// console.log(orderSuperHeroes( "nombreReal7" )) //!ERROR
+// console.log(orderSuperHeroes( "nombreReal7" )) //!HANDLE ERROR

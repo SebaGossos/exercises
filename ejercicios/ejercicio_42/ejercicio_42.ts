@@ -87,7 +87,6 @@ enum Errors {
     'ERROR_FILTER' = 'DIND´T FOUND THE FILTER THAT YOU SEND'
 }
 
-
 let informacionSuperheroes: SuperHeroes  = {
     "Superman": {
         "nombreReal": "Clark Kent",
@@ -174,5 +173,5 @@ const orderSuperHeroes = ( orderBy: string ): SuperHeroes | string => {
 
 // console.log(orderSuperHeroes( "nombre" ))
 console.log(orderSuperHeroes( "nombreReal" ))
-// console.log(orderSuperHeroes( "nombreReal7" )) //!ERROR
+// console.log(orderSuperHeroes( "nombreReal7" )) //!HANDLE ERROR
 
