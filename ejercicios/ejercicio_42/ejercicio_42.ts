@@ -1,9 +1,8 @@
-"use strict";
 /* Enunciado Ejercicio 42:
 Dado un objeto de superheroes, crear una función que sea capaz
 de ordenarlos por su nombre real o por su nombre de superheroe.
  
-Superheroes:
+Superheroes: 
  
 let informacionSuperheroes = {
     "Superman": {
@@ -75,11 +74,21 @@ Devuelve:
   },
   ...
 ] */
-var Errors;
-(function (Errors) {
-    Errors["ERROR_FILTER"] = "DIND\u00B4T FOUND THE FILTER THAT YOU SEND";
-})(Errors || (Errors = {}));
-let informacionSuperheroes = {
+
+type SuperHeroes = {
+    [key: string] : {
+        'nombreReal': string,
+        'afiliacion': string,
+        'poderes': string[]
+    }
+}
+
+enum Errors {
+    'ERROR_FILTER' = 'DIND´T FOUND THE FILTER THAT YOU SEND'
+}
+
+
+let informacionSuperheroes: SuperHeroes  = {
     "Superman": {
         "nombreReal": "Clark Kent",
         "afiliacion": "DC Comics",
@@ -130,40 +139,50 @@ let informacionSuperheroes = {
         "afiliacion": "Marvel Comics",
         "poderes": ["super fuerza", "resistencia sobrenatural", "transformación en Hulk"]
     }
-};
-function orderByFilter(superHeroes, orderBy) {
-    const superHeroesOrder = {};
-    switch (orderBy) {
+}
+
+
+function orderByFilter( superHeroes: string[], orderBy: string ):SuperHeroes  {
+    const superHeroesOrder: SuperHeroes = {}
+    switch(orderBy){
         case 'nombre':
-            const sortSupereHeroes = superHeroes.sort((a, b) => a.localeCompare(b));
-            for (const hero of sortSupereHeroes) {
-                superHeroesOrder[hero] = informacionSuperheroes[hero];
+            const sortSupereHeroes = superHeroes.sort( (a, b) => a.localeCompare(b))
+            for ( const hero of sortSupereHeroes ) {
+                superHeroesOrder[hero] = informacionSuperheroes[hero]
             }
             return superHeroesOrder;
         case 'nombreReal':
-            const sortSuperHeroes = superHeroes.sort((a, b) => {
+            const sortSuperHeroes = superHeroes.sort( (a, b) => {
                 a = informacionSuperheroes[a].nombreReal;
-                b = informacionSuperheroes[b].nombreReal;
-                return a.localeCompare(b);
+                b = informacionSuperheroes[b].nombreReal; 
+                return a.localeCompare(b)
             });
-            for (const hero of sortSuperHeroes) {
-                superHeroesOrder[hero] = informacionSuperheroes[hero];
+            for ( const hero of sortSuperHeroes ) {
+                superHeroesOrder[hero] = informacionSuperheroes[hero]
             }
-            return superHeroesOrder;
+            return superHeroesOrder
+    
     }
+
     return superHeroesOrder;
 }
-const orderSuperHeroes = (orderBy) => {
-    if (orderBy === 'nombre') {
+
+
+const orderSuperHeroes = ( orderBy: string ): SuperHeroes | string => {
+    
+    if ( orderBy === 'nombre'){
         const superHeroes = Object.keys(informacionSuperheroes);
-        return orderByFilter(superHeroes, orderBy);
+        return orderByFilter( superHeroes, orderBy );
     }
-    if (orderBy === 'nombreReal') {
+    if ( orderBy === 'nombreReal'){
         const superHeroes = Object.keys(informacionSuperheroes);
-        return orderByFilter(superHeroes, orderBy);
+        return orderByFilter( superHeroes, orderBy );
     }
-    return Errors.ERROR_FILTER;
-};
+        
+    return Errors.ERROR_FILTER ;
+}
+
 // console.log(orderSuperHeroes( "nombre" ))
-console.log(orderSuperHeroes("nombreReal"));
+console.log(orderSuperHeroes( "nombreReal" ))
 // console.log(orderSuperHeroes( "nombreReal7" )) //!ERROR
+
