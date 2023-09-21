@@ -1,25 +1,17 @@
 "use strict";
-/* Enunciado Ejercicio 40:
-Crea una función que convierta un número romano a decimal.
+/* Enunciado Ejercicio 41:
+Crea una función que invierta los números de un número entero.
  
 Ejemplos:
-romanoAEntero("XVIII")   // 18
-romanoAEntero("CXX")     // 120 */
-const romanoAEntero = (romNum) => {
-    const numerosRomanos = {
-        I: 1,
-        V: 5,
-        X: 10,
-        L: 50,
-        C: 100,
-        D: 500,
-        M: 1000
-    };
-    const dividir = romNum.toUpperCase().split('');
-    let result = 0;
-    for (let numRom of dividir)
-        result += numerosRomanos[numRom];
-    return result;
-};
-console.log(romanoAEntero("XVIII"));
-console.log(romanoAEntero("CXX"));
+invertirEntero(123)   // 321
+invertirEntero(-123)  // -321 */
+function invertirEntero(intNum) {
+    const splitNum = intNum.toString().split('');
+    const finalNum = splitNum[0] === '-'
+        ? +('-' + splitNum.slice(1).reverse().join(''))
+        : +splitNum.reverse().join('');
+    return finalNum;
+}
+console.log(invertirEntero(123)); // 321
+console.log(invertirEntero(-123843729742389)); // -321
+invertirEntero(-123); // -321
