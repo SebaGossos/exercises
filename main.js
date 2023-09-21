@@ -131,27 +131,27 @@ let informacionSuperheroes = {
         "poderes": ["super fuerza", "resistencia sobrenatural", "transformación en Hulk"]
     }
 };
-function orderByFilter(superHeroes, orderBy) {
+function orderNamesInArr(superArr) {
     const superHeroesOrder = {};
+    for (const hero of superArr) {
+        superHeroesOrder[hero] = informacionSuperheroes[hero];
+    }
+    return superHeroesOrder;
+}
+function orderByFilter(superHeroes, orderBy) {
+    let sortSuperHeroes;
     switch (orderBy) {
         case 'nombre':
-            const sortSupereHeroes = superHeroes.sort((a, b) => a.localeCompare(b));
-            for (const hero of sortSupereHeroes) {
-                superHeroesOrder[hero] = informacionSuperheroes[hero];
-            }
-            return superHeroesOrder;
+            sortSuperHeroes = superHeroes.sort((a, b) => a.localeCompare(b));
+            return orderNamesInArr(sortSuperHeroes);
         case 'nombreReal':
-            const sortSuperHeroes = superHeroes.sort((a, b) => {
+            sortSuperHeroes = superHeroes.sort((a, b) => {
                 a = informacionSuperheroes[a].nombreReal;
                 b = informacionSuperheroes[b].nombreReal;
                 return a.localeCompare(b);
             });
-            for (const hero of sortSuperHeroes) {
-                superHeroesOrder[hero] = informacionSuperheroes[hero];
-            }
-            return superHeroesOrder;
+            return orderNamesInArr(sortSuperHeroes);
     }
-    return superHeroesOrder;
 }
 const orderSuperHeroes = (orderBy) => {
     if (orderBy === 'nombre') {
@@ -164,6 +164,6 @@ const orderSuperHeroes = (orderBy) => {
     }
     return Errors.ERROR_FILTER;
 };
-// console.log(orderSuperHeroes( "nombre" ))
-console.log(orderSuperHeroes("nombreReal"));
+console.log(orderSuperHeroes("nombre"));
+// console.log(orderSuperHeroes( "nombreReal" ))
 // console.log(orderSuperHeroes( "nombreReal7" )) //!ERROR

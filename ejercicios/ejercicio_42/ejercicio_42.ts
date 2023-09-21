@@ -141,35 +141,35 @@ let informacionSuperheroes: SuperHeroes  = {
     }
 }
 
+function orderNamesInArr ( superArr: string[]) {
+    const superHeroesOrder: SuperHeroes = {}
+    for ( const hero of superArr ) {
+        superHeroesOrder[hero] = informacionSuperheroes[hero]
+    }
+    return superHeroesOrder;
+}
 
 function orderByFilter( superHeroes: string[], orderBy: string ):SuperHeroes  {
-    const superHeroesOrder: SuperHeroes = {}
+
+    let sortSuperHeroes: string[];
+    
     switch(orderBy){
         case 'nombre':
-            const sortSupereHeroes = superHeroes.sort( (a, b) => a.localeCompare(b))
-            for ( const hero of sortSupereHeroes ) {
-                superHeroesOrder[hero] = informacionSuperheroes[hero]
-            }
-            return superHeroesOrder;
+            sortSuperHeroes = superHeroes.sort( (a, b) => a.localeCompare(b))
+            return orderNamesInArr( sortSuperHeroes );
         case 'nombreReal':
-            const sortSuperHeroes = superHeroes.sort( (a, b) => {
+            sortSuperHeroes = superHeroes.sort( (a, b) => {
                 a = informacionSuperheroes[a].nombreReal;
                 b = informacionSuperheroes[b].nombreReal; 
                 return a.localeCompare(b)
             });
-            for ( const hero of sortSuperHeroes ) {
-                superHeroesOrder[hero] = informacionSuperheroes[hero]
-            }
-            return superHeroesOrder
-    
+            return orderNamesInArr( sortSuperHeroes );
     }
-
-    return superHeroesOrder;
 }
 
 
 const orderSuperHeroes = ( orderBy: string ): SuperHeroes | string => {
-    
+
     if ( orderBy === 'nombre'){
         const superHeroes = Object.keys(informacionSuperheroes);
         return orderByFilter( superHeroes, orderBy );
@@ -179,10 +179,10 @@ const orderSuperHeroes = ( orderBy: string ): SuperHeroes | string => {
         return orderByFilter( superHeroes, orderBy );
     }
         
-    return Errors.ERROR_FILTER ;
-}
+    return Errors.ERROR_FILTER;
+} 
 
-// console.log(orderSuperHeroes( "nombre" ))
-console.log(orderSuperHeroes( "nombreReal" ))
+console.log(orderSuperHeroes( "nombre" ))
+// console.log(orderSuperHeroes( "nombreReal" ))
 // console.log(orderSuperHeroes( "nombreReal7" )) //!ERROR
 
