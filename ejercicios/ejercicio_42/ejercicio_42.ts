@@ -169,9 +169,9 @@ const orderSuperHeroes = ( orderBy: string ): SuperHeroes | string => {
     }
         
     return Errors.ERROR_FILTER;
-} 
+
+}
 
 // console.log(orderSuperHeroes( "nombre" ))
-console.log(orderSuperHeroes( "nombreReal" ))
+console.log(33,orderSuperHeroes( "nombreReal" ))
 // console.log(orderSuperHeroes( "nombreReal7" )) //!HANDLE ERROR
-
